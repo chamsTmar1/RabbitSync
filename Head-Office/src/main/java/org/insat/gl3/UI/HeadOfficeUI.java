@@ -98,6 +98,9 @@ public class HeadOfficeUI extends JFrame {
         syncButton.addActionListener(e -> {
             try {
                 Synchronization.syncWithDataFromBranches();
+                // Refresh the table to reflect any changes
+                populateTable();
+
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }

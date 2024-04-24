@@ -14,12 +14,19 @@ public class Synchronization {
         Receive receive = new Receive();
         String migrationScript = receive.getReceivedMessage();
 
-        // Execute migration script on the Head Office database
-        executeMigrationScript(migrationScript);
+        // Check if migration script is not empty or null
+        if (migrationScript != null && !migrationScript.isEmpty()) {
+            // Execute migration script on the Head Office database
+            executeMigrationScript(migrationScript);
+        } else {
+            // Handle the case when migration script is empty or null
+            System.out.println("Received migration script is empty or null.");
+        }
     }
 
+
     // Method to execute migration script on the Head Office database
-    private static void executeMigrationScript(String migrationScript) {
+    public static void executeMigrationScript(String migrationScript) {
         Connection connection = null;
         Statement statement = null;
 
@@ -32,6 +39,7 @@ public class Synchronization {
             statement.execute(migrationScript);
 
             System.out.println("Migration script executed successfully.");
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

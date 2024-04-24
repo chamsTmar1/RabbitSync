@@ -8,12 +8,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 public class Send {
-    private static final String QUEUE_NAME = "migration_queue";
+    private static final String QUEUE_NAME = "migration_script_queue";
 
     public static void sendMigrationScript(String migrationScript) throws IOException, TimeoutException {
         // Create a connection to the RabbitMQ server
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("localhost"); // RabbitMQ server address
+        factory.setHost("localhost");
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
 
